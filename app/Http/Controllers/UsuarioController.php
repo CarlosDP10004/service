@@ -21,7 +21,6 @@ class UsuarioController extends Controller
             'NombreUsuario' => 'required|string|max:255|unique:Usuario',
             'Contrasenna' => 'required|string|min:8'
         ]);
-
         $user = User::create([
             'NombreUsuario' => $validatedData['NombreUsuario'],
             'Contrasenna' => $validatedData['Contrasenna'],
@@ -30,7 +29,6 @@ class UsuarioController extends Controller
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer'
@@ -58,6 +56,10 @@ class UsuarioController extends Controller
     }
 
     public function login(Request $request){
+        $validatedData = $request->validate([            
+            'NombreUsuario' => 'required|string|max:255',
+            'Contrasenna' => 'required|string|min:8'
+        ]);
         $result = DB::select('CALL AutenticarUsuario( :nombre_usuario, :claveUsuario )', [$request['NombreUsuario'], $request['Contrasenna']]);      
        
         switch($result[0]->Id){
