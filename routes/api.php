@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', 'AuthController@login')->name('login');
+Route::post('login', 'UsuarioController@login')->name('login');
 Route::post('register', 'AuthController@register');
 
 Route::get('roles', 'RolController@index')->middleware('auth:sanctum');
@@ -27,3 +27,4 @@ Route::post('roles', 'RolController@store')->middleware('auth:sanctum');
 Route::put('roles/{id}', 'RolController@update')->middleware('auth:sanctum');
 
 Route::post('usuarios', 'UsuarioController@store')->middleware('auth:sanctum');
+Route::post('usuarios', 'UsuarioController@index')->middleware('auth:sanctum');

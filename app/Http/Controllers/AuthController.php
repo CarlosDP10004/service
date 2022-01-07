@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -30,17 +33,26 @@ class AuthController extends Controller
     }
 
     public function login(Request $request){
-        if(Auth::attempt($request->only('NombreUsuario', 'Contrasenna'))){
-            return response()->json([
-                'message' => 'Invalid login details'
-            ], 401);
-        }
+        $result = DB::select('CALL AutenticarUsuario( :nombre_usuario, :claveUsuario )', [$request['NombreUsuario'], $request['Contrasenna']]);      
+       
+        switch($result['Id']){
+            case(0):
+                return response()->json(['message' => 'User is not registered'], 401);
+                break;
+            case(1):
+                return response()->json(['message' => 'Invalid password'], 401);
+                break;
+            case(2):
+                return response()->json(['message' => 'User is blocked'], 401);
+                break;
+            case(3):
+                return response()->json(['message' => 'User is blocked'], 401);
+                break;
+            default:
+            $user = User::where('NombreUsuario', $request['NombreUsuario'])->firstOrFail();
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json(['access_token' => $token,'token_type' => 'Bearer']);
+        }                    
 
-        $user = User::where('NombreUsuario', $request['NombreUsuario'])->firstOrFail();
-        $token = $user->createToken('auth_token')->plainTextToken;
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer'
-        ]);
     }
 }
