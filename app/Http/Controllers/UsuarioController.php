@@ -12,7 +12,7 @@ class UsuarioController extends Controller
 {
     //
     public function index()
-    {
+    {   
         return User::all();
     }
 
@@ -81,5 +81,12 @@ class UsuarioController extends Controller
             return response()->json(['access_token' => $token,'token_type' => 'Bearer']);
         }
     }
+
+    public function show($id){
+        $user = User::find($id);
+        $user->roles;
+        return $user;
+    }
+
 
 }
