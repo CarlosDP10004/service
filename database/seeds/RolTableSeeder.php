@@ -14,7 +14,7 @@ class RolTableSeeder extends Seeder
     public function run()
     {
         //
-        Rol::truncate();
+        //Rol::truncate();
 
         $faker = \Faker\Factory::create();
 

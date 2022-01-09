@@ -18,9 +18,7 @@ class CreateTableUsuario extends Migration
             $table->string('NombreUsuario')->unique();
             $table->string('Contrasenna');
             $table->boolean('Estado');
-            $table->integer('Intento');                        
-            $table->rememberToken();
-            $table->timestamps();
+            $table->integer('Intento');
         });
     }
 

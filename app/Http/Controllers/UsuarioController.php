@@ -56,7 +56,7 @@ class UsuarioController extends Controller
     }
 
     public function login(Request $request){
-        $validatedData = $request->validate([            
+        $request->validate([            
             'NombreUsuario' => 'required|string|max:255',
             'Contrasenna' => 'required|string|min:8'
         ]);
@@ -83,9 +83,27 @@ class UsuarioController extends Controller
     }
 
     public function show($id){
-        $user = User::find($id);
-        $user->roles;
-        return $user;
+        if(User::where('IdUsuario', $id)->exists()){
+            $user = User::findOrFail($id);
+            $user->roles;
+            return $user;
+        }else{
+            return response()->json("El usuario no se ha encontrado", 404);
+        }
+    }
+
+    public function update(Request $request, $id){       
+        $this->validate($request, [
+            'NombreUsuario' => 'required|string|max:255|unique:Usuario',
+            'Contrasenna' => 'required|string|min:8'
+        ]);
+        if(User::where('IdUsuario', $id)->exists()){
+            User::where('IdUsuario', $id)->update(array('NombreUsuario' => $request['NombreUsuario'], 'Contrasenna' => $request['Contrasenna']));
+            User::find($id)->roles()->sync($request['Roles']);               
+            return response()->json("El registro se ha actualizado con éxito", 200);
+        }else{
+            return response()->json("El usuario no se ha encontrado", 404);
+        }
     }
 
 

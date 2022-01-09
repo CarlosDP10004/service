@@ -29,3 +29,4 @@ Route::put('roles/{id}', 'RolController@update')->middleware('auth:sanctum');
 Route::post('usuarios', 'UsuarioController@store')->middleware('auth:sanctum');
 Route::get('usuarios', 'UsuarioController@index')->middleware('auth:sanctum');
 Route::get('usuarios/{id}', 'UsuarioController@show')->middleware('auth:sanctum');
+Route::put('usuarios/{id}', 'UsuarioController@update')->middleware('auth:sanctum');

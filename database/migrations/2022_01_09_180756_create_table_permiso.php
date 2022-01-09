@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableUsuarioRol extends Migration
+class CreateTablePermiso extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTableUsuarioRol extends Migration
      */
     public function up()
     {
-        Schema::create('UsuarioRol', function (Blueprint $table) {
-            $table->increments('IdUsuarioRol');
-            $table->integer('IdUsuario')->unsigned();
-            $table->integer('IdRol')->unsigned();
+        Schema::create('Permiso', function (Blueprint $table) {
+            $table->increments('IdPermiso');
+            $table->string('Modulo');
+            $table->string('NombrePermiso');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateTableUsuarioRol extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('UsuarioRol');
+        Schema::dropIfExists('Permiso');
     }
 }
