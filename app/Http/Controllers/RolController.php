@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rol;
+use App\Permiso;
 
 
 class RolController extends Controller
@@ -51,5 +52,9 @@ class RolController extends Controller
         }else{
             return response()->json("El rol no se ha encontrado", 404);
         }
+    }
+
+    public function permissions(){
+        return Permiso::all();
     }
 }

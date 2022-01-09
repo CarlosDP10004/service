@@ -25,6 +25,7 @@ Route::get('roles', 'RolController@index')->middleware('auth:sanctum');
 Route::get('roles/{id}', 'RolController@show')->middleware('auth:sanctum');
 Route::post('roles', 'RolController@store')->middleware('auth:sanctum');
 Route::put('roles/{id}', 'RolController@update')->middleware('auth:sanctum');
+Route::get('permisos', 'RolController@permissions')->middleware('auth:sanctum');
 
 Route::post('usuarios', 'UsuarioController@store')->middleware('auth:sanctum');
 Route::get('usuarios', 'UsuarioController@index')->middleware('auth:sanctum');

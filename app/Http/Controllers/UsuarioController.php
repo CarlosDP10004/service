@@ -94,8 +94,8 @@ class UsuarioController extends Controller
 
     public function update(Request $request, $id){       
         $this->validate($request, [
-            'NombreUsuario' => 'required|string|max:255|unique:Usuario',
-            'Contrasenna' => 'required|string|min:8'
+            'NombreUsuario' => 'required|max:255',
+            'Contrasenna' => 'required|max:255'
         ]);
         if(User::where('IdUsuario', $id)->exists()){
             User::where('IdUsuario', $id)->update(array('NombreUsuario' => $request['NombreUsuario'], 'Contrasenna' => $request['Contrasenna']));
