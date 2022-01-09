@@ -16,7 +16,6 @@ class RolController extends Controller
             return Rol::all();
         }
         return response()->json("El usuario no tiene los permisos", 401);
-        
     }
 
     public function store(Request $request)
