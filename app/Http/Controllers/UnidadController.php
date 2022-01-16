@@ -26,7 +26,7 @@ class UnidadController extends Controller
             'NombreUnidad' => 'required|string|max:255|unique:Unidad',
         ]);
         /*
-        if(UsuarioController::validatepermissions($request, 'Roles', 'Agregar')){
+        if(UsuarioController::validatepermissions($request, 'Unidades', 'Agregar')){
             Unidad::create([
             'NombreUnidad'=>$request->NombreUnidad,
             'IdUsuario'=>$request->IdUsuario,
@@ -48,7 +48,7 @@ class UnidadController extends Controller
     {
         //
         /*
-        if(UsuarioController::validatepermissions($request, 'Roles', 'Agregar')){
+        if(UsuarioController::validatepermissions($request, 'Unidades', 'Ver Detalle')){
             Unidad::create([
             'NombreUnidad'=>$request->NombreUnidad,
             'IdUsuario'=>$request->IdUsuario,
@@ -76,6 +76,19 @@ class UnidadController extends Controller
         $this->validate($request, [
             'NombreUnidad' => 'required|string|max:255|unique:Unidad',
         ]);
+        /*
+        if(UsuarioController::validatepermissions($request, 'Unidades', 'Editar')){
+            if(Unidad::where('IdUnidad', $id)->exists()){
+            Unidad::where('IdUnidad', $id)->update(array('NombreUnidad' => $request['NombreUnidad'], 
+            'IdUsuario' => $request['IdUsuario']));
+            return response()->json("El registro se ha actualizado con éxito", 200);
+            }else{
+                return response()->json("El rol no se ha encontrado", 404);
+            }
+        }
+        return response()->json("El usuario no tiene los permisos", 401);
+        */
+        
         if(Unidad::where('IdUnidad', $id)->exists()){
             Unidad::where('IdUnidad', $id)->update(array('NombreUnidad' => $request['NombreUnidad'], 
             'IdUsuario' => $request['IdUsuario']));
