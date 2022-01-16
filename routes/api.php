@@ -37,3 +37,8 @@ Route::get('unidades', 'UnidadController@index')->middleware('auth:sanctum');
 Route::post('unidades', 'UnidadController@store')->middleware('auth:sanctum');
 Route::get('unidades/{id}', 'UnidadController@show')->middleware('auth:sanctum');
 Route::put('unidades/{id}', 'UnidadController@update')->middleware('auth:sanctum');
+
+Route::get('plazas', 'PlazaController@index')->middleware('auth:sanctum');
+Route::post('plazas', 'PlazaController@store')->middleware('auth:sanctum');
+Route::get('plazas/{id}', 'PlazaController@show')->middleware('auth:sanctum');
+Route::put('plazas/{id}', 'PlazaController@update')->middleware('auth:sanctum');

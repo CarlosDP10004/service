@@ -49,11 +49,13 @@ class UnidadController extends Controller
         //
         /*
         if(UsuarioController::validatepermissions($request, 'Unidades', 'Ver Detalle')){
-            Unidad::create([
-            'NombreUnidad'=>$request->NombreUnidad,
-            'IdUsuario'=>$request->IdUsuario,
-            ]);
-            return response()->json("La unidad se ha agregado con éxito", 200);
+            if(Unidad::where('IdUnidad', $id)->exists()){
+            $unidad = Unidad::findOrFail($id);
+            $unidad->encargado;
+            return $unidad;
+            }else{
+                return response()->json("El rol no se ha encontrado", 404);
+            }
         }
         return response()->json("El usuario no tiene los permisos", 401);
         */
@@ -64,8 +66,6 @@ class UnidadController extends Controller
         }else{
             return response()->json("El rol no se ha encontrado", 404);
         }
-
-
     }
 
 
