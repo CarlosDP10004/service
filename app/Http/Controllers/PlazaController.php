@@ -90,7 +90,7 @@ class PlazaController extends Controller
             'IdUnidad' => $request['IdUnidad']));
             return response()->json("El registro se ha actualizado con éxito", 200);
         }else{
-            return response()->json("El rol no se ha encontrado", 404);
+            return response()->json("La plaza no se ha encontrado", 404);
         }
     }    
 }

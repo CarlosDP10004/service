@@ -49,3 +49,13 @@ Route::get('cuentas', 'CuentaController@index')->middleware('auth:sanctum');
 Route::post('cuentas', 'CuentaController@store')->middleware('auth:sanctum');
 Route::get('cuentas/{id}', 'CuentaController@show')->middleware('auth:sanctum');
 Route::put('cuentas/{id}', 'CuentaController@update')->middleware('auth:sanctum');
+
+Route::get('proveedores', 'ProveedorController@index')->middleware('auth:sanctum');
+Route::post('proveedores', 'ProveedorController@store')->middleware('auth:sanctum');
+Route::get('proveedores/{id}', 'ProveedorController@show')->middleware('auth:sanctum');
+Route::put('proveedores/{id}', 'ProveedorController@update')->middleware('auth:sanctum');
+
+Route::get('clasificaciones', 'ClasificacionController@index')->middleware('auth:sanctum');
+Route::post('clasificaciones', 'ClasificacionController@store')->middleware('auth:sanctum');
+Route::get('clasificaciones/{id}', 'ClasificacionController@show')->middleware('auth:sanctum');
+Route::put('clasificaciones/{id}', 'ClasificacionController@update')->middleware('auth:sanctum');

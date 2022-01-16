@@ -7,11 +7,14 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Cuenta' => $baseDir . '/app/Cuenta.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\CuentaController' => $baseDir . '/app/Http/Controllers/CuentaController.php',
     'App\\Http\\Controllers\\OrigenController' => $baseDir . '/app/Http/Controllers/OrigenController.php',
     'App\\Http\\Controllers\\PlazaController' => $baseDir . '/app/Http/Controllers/PlazaController.php',
+    'App\\Http\\Controllers\\ProveedorController' => $baseDir . '/app/Http/Controllers/ProveedorController.php',
     'App\\Http\\Controllers\\RolController' => $baseDir . '/app/Http/Controllers/RolController.php',
     'App\\Http\\Controllers\\UnidadController' => $baseDir . '/app/Http/Controllers/UnidadController.php',
     'App\\Http\\Controllers\\UsuarioController' => $baseDir . '/app/Http/Controllers/UsuarioController.php',
@@ -27,6 +30,7 @@ return array(
     'App\\Origen' => $baseDir . '/app/Origen.php',
     'App\\Permiso' => $baseDir . '/app/Permiso.php',
     'App\\Plaza' => $baseDir . '/app/Plaza.php',
+    'App\\Proveedor' => $baseDir . '/app/Proveedor.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
