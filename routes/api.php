@@ -42,3 +42,10 @@ Route::get('plazas', 'PlazaController@index')->middleware('auth:sanctum');
 Route::post('plazas', 'PlazaController@store')->middleware('auth:sanctum');
 Route::get('plazas/{id}', 'PlazaController@show')->middleware('auth:sanctum');
 Route::put('plazas/{id}', 'PlazaController@update')->middleware('auth:sanctum');
+
+Route::get('origenes', 'OrigenController@index')->middleware('auth:sanctum');
+
+Route::get('cuentas', 'CuentaController@index')->middleware('auth:sanctum');
+Route::post('cuentas', 'CuentaController@store')->middleware('auth:sanctum');
+Route::get('cuentas/{id}', 'CuentaController@show')->middleware('auth:sanctum');
+Route::put('cuentas/{id}', 'CuentaController@update')->middleware('auth:sanctum');
