@@ -32,3 +32,8 @@ Route::get('usuarios', 'UsuarioController@index')->middleware('auth:sanctum');
 Route::get('usuarios/{id}', 'UsuarioController@show')->middleware('auth:sanctum');
 Route::put('usuarios/{id}', 'UsuarioController@update')->middleware('auth:sanctum');
 Route::post('logout', 'UsuarioController@logout')->middleware('auth:sanctum');
+
+Route::get('unidades', 'UnidadController@index')->middleware('auth:sanctum');
+Route::post('unidades', 'UnidadController@store')->middleware('auth:sanctum');
+Route::get('unidades/{id}', 'UnidadController@show')->middleware('auth:sanctum');
+Route::put('unidades/{id}', 'UnidadController@update')->middleware('auth:sanctum');
