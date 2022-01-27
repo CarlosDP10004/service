@@ -37,16 +37,16 @@ class AuthController extends Controller
        
         switch($result['Id']){
             case(0):
-                return response()->json(['message' => 'User is not registered'], 401);
+                return response()->json(['message' => 'El usuario no se encuentra registrado.'], 401);
                 break;
             case(1):
-                return response()->json(['message' => 'Invalid password'], 401);
+                return response()->json(['message' => 'Contraseña invalida.'], 401);
                 break;
             case(2):
-                return response()->json(['message' => 'User is blocked'], 401);
+                return response()->json(['message' => 'Su usuario se encuentra bloqueado.'], 401);
                 break;
             case(3):
-                return response()->json(['message' => 'User is blocked'], 401);
+                return response()->json(['message' => 'Su usuario se encuentra bloqueado.'], 401);
                 break;
             default:
             $user = User::where('NombreUsuario', $request['NombreUsuario'])->firstOrFail();
