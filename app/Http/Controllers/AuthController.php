@@ -8,8 +8,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
+
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->guard = "api";
+    }
+
     //
     public function register(Request $request){
         $validatedData = $request->validate([            
@@ -25,7 +32,6 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer'
@@ -33,26 +39,31 @@ class AuthController extends Controller
     }
 
     public function login(Request $request){
-        $result = DB::select('CALL AutenticarUsuario( :nombre_usuario, :claveUsuario )', [$request['NombreUsuario'], $request['Contrasenna']]);      
-       
-        switch($result['Id']){
-            case(0):
-                return response()->json(['message' => 'El usuario no se encuentra registrado.'], 401);
-                break;
-            case(1):
-                return response()->json(['message' => 'Contraseña invalida.'], 401);
-                break;
-            case(2):
+        $user = $request['NombreUsuario'];
+        $pass = $request['Contrasenna'];
+        if(!(User::where('NombreUsuario', $user)->exists())){
+            return response()->json(['message' => 'El usuario no existe reviselo.'], 401);
+        }
+        $session = User::where(['NombreUsuario' => $user, 'Contrasenna' => $pass])->first();
+        if($session === null){
+            if((User::where('NombreUsuario', $user)->firstOrFail())['Intento'] == 2){
+                User::where('NombreUsuario', $user)->update(array('Estado' => 0));
+            }
+            if((User::where('NombreUsuario', $user)->firstOrFail())['Intento'] > 2){
                 return response()->json(['message' => 'Su usuario se encuentra bloqueado.'], 401);
-                break;
-            case(3):
-                return response()->json(['message' => 'Su usuario se encuentra bloqueado.'], 401);
-                break;
-            default:
-            $user = User::where('NombreUsuario', $request['NombreUsuario'])->firstOrFail();
-            $token = $user->createToken('auth_token')->plainTextToken;
-            return response()->json(['access_token' => $token,'token_type' => 'Bearer']);
-        }                    
+            }
+            $intento = User::where('NombreUsuario', $user)->firstOrFail()['Intento'] + 1;
+            User::where('NombreUsuario', $user)->update(array('Intento' => $intento));
+            return response()->json(['message' => 'Contraseña invalida.'], 401);
+        }
+        $token = auth( $this->guard )->login( $session );
+        return $this->respondWithToken($token);
+    }
 
+    protected function respondWithToken($token){
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer'
+        ]);
     }
 }
