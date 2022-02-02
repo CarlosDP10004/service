@@ -15,7 +15,7 @@ class RolController extends Controller
         if(UsuarioController::validatepermissions($request, 'Roles', 'Ver Lista')){
             return Rol::all();
         }
-        return response()->json("El usuario no tiene los permisos", 401);
+        return response()->json("Acceso denegado", 401);
     }
 
     public function store(Request $request)

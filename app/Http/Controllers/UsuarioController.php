@@ -120,6 +120,9 @@ class UsuarioController extends Controller
 
     public static function validatepermissions($request, $modulo, $permission){
         $user = $request->user();
+        if($user === null){
+            return false;
+        }        
         $roles = $user->roles;
         foreach($roles as $rol){
             $permisos = $rol->permisos;
