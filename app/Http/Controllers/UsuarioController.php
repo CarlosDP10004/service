@@ -16,7 +16,7 @@ class UsuarioController extends Controller
         if($this->validatepermissions($request, 'Usuarios', 'Ver Lista')){
             return User::all();
         }
-        return response()->json("El usuario no tiene los permisos", 401);        
+        return response()->json("Acceso denegado", 401);        
     }
 
     public function register(Request $request){
@@ -57,7 +57,7 @@ class UsuarioController extends Controller
             $user->roles()->sync($roles);            
             return response()->json("El usuario se ha agregado con éxito", 200);
         }
-        return response()->json("El usuario no tiene los permisos", 401); 
+        return response()->json("Acceso denegado", 401); 
     }
 
     public function login(Request $request){
@@ -97,7 +97,7 @@ class UsuarioController extends Controller
                 return response()->json("El usuario no se ha encontrado", 404);
             }
         }
-        return response()->json("El usuario no tiene los permisos", 401); 
+        return response()->json("Acceso denegado", 401); 
     }
 
     public function update(Request $request, $id){  
@@ -115,11 +115,14 @@ class UsuarioController extends Controller
                 return response()->json("El usuario no se ha encontrado", 404);
             }
         }
-        return response()->json("El usuario no tiene los permisos", 401); 
+        return response()->json("Acceso denegado", 401); 
     }
 
     public static function validatepermissions($request, $modulo, $permission){
         $user = $request->user();
+        if($user === null){
+            return false;
+        }        
         $roles = $user->roles;
         foreach($roles as $rol){
             $permisos = $rol->permisos;
