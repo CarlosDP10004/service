@@ -15,7 +15,7 @@ class RolController extends Controller
         if(UsuarioController::validatepermissions($request, 'Roles', 'Ver Lista')){
             return Rol::all();
         }
-        return response()->json("El usuario no tiene los permisos", 401);
+        return response()->json("Acceso denegado", 401);
     }
 
     public function store(Request $request)
@@ -33,7 +33,7 @@ class RolController extends Controller
             $rol->permisos()->sync($permisos);
             return response()->json("El rol se ha agregado con éxito", 200);
         }
-        return response()->json("El usuario no tiene los permisos", 401);
+        return response()->json("Acceso denegado", 401);
     }
 
     public function show(Request $request, $id)
@@ -47,7 +47,7 @@ class RolController extends Controller
                 return response()->json("El rol no se ha encontrado", 404);
             }
         }
-        return response()->json("El usuario no tiene los permisos", 401);
+        return response()->json("Acceso denegado", 401);
     }
 
     public function update(Request $request, $id)
@@ -64,7 +64,7 @@ class RolController extends Controller
                 return response()->json("El rol no se ha encontrado", 404);
             }
         }
-        return response()->json("El usuario no tiene los permisos", 401);
+        return response()->json("Acceso denegado", 401);
     }
 
     public function permissions(){
