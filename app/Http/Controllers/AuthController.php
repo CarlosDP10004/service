@@ -56,6 +56,9 @@ class AuthController extends Controller
             User::where('NombreUsuario', $user)->update(array('Intento' => $intento));
             return response()->json(['message' => 'Contraseña invalida.'], 401);
         }
+        if((User::where('NombreUsuario', $user)->firstOrFail())['Estado'] == false){
+            return response()->json(['message' => 'Su usuario se encuentra bloqueado.'], 401);
+        }
         $token = auth( $this->guard )->login( $session );
         return $this->respondWithToken($token);
     }
